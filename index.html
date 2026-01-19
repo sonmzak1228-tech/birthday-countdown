@@ -1,0 +1,58 @@
+# birthday-countdown
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      text-align: center;
+      padding-top: 30vh;
+    }
+    .label {
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      opacity: 0.7;
+    }
+    .time {
+      font-size: 32px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="label">SPECIAL DAYまで</div>
+<div class="time" id="countdown"></div>
+
+<script>
+  const target = new Date("2026-08-07T00:00:00+09:00");
+
+  function update() {
+    const now = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById("countdown").innerHTML = "0日 0時間 0分 0秒";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const minutes = Math.floor(diff / (1000 * 60)) % 60;
+    const seconds = Math.floor(diff / 1000) % 60;
+
+    document.getElementById("countdown").innerHTML =
+      `${days}日 ${hours}時間 ${minutes}分 ${seconds}秒`;
+  }
+
+  update();
+  setInterval(update, 1000);
+</script>
+
+</body>
+</html>
